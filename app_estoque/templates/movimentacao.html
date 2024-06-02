@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style_table.css') }}">
+
+</head>
+<body>
+    <div>
+        <h1>Lista de Movimentações</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Filial</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                    <th>Preço</th>
+                </tr>
+            </thead>
+            <tbody id="movimentacoes-tabela">
+            </tbody>
+        </table>
+        <button onclick="location.href='/';">Voltar</button>
+    </div>
+
+        <script>
+            // Função para buscar as movimentacoes do servidor e exibi-los na tabela
+            async function carregarMovimentacoes() {
+                const response = await fetch('/api/movimentacao');
+                const movimentacao = await response.json();
+    
+                const tabela = document.getElementById('movimentacoes-tabela');
+                movimentacao.forEach(produto => {
+                    const linha = document.createElement('tr');
+                    linha.innerHTML = `
+                        <td>${produto.produto}</td>
+                        <td>${produto.filial}</td>
+                        <td>${produto.tipo}</td>
+                        <td>${produto.quantidade}</td>
+                        <td>${produto.preco}</td>
+                    `;
+                    tabela.appendChild(linha);
+                });
+            }
+    
+            // Carregar as movimentacoes quando a página for carregada
+            window.onload = carregarMovimentacoes;
+        </script>
+
+        <!-- <h2>Movimentações de Estoque</h2>
+        <table class="movimentos-table">
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Quantidade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for movimento in movimentos %}
+                <tr>
+                    <td>{{ movimento.data }}</td>
+                    <td>{{ movimento.tipo }}</td>
+                    <td>{{ movimento.quantidade }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table> -->
+        
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Estoque</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div id="app">
+        <h1>Gerenciamento de Estoque</h1>
+        <form id="productForm">
+            <input type="hidden" id="productId">
+            <label for="produto">Produto:</label>
+            <input type="text" id="produto" required>
+            <label for="preco">Preço:</label>
+            <input type="number" id="preco" step="0.01" required> 
+            <label for="estoque">Quantidade:</label>
+            <input type="number" id="estoque" required>
+            <label for="filial">Filial:</label>
+            <input type="text" id="filial" required>
+            <label for="tipo">Selecione:</label>
+            <select id="tipo" required>
+                <option value="entrada">Entrada</option>
+                <option value="saida">Saída</option>
+            </select>
+            <button type="submit">Salvar</button>
+        </form>
+        <!-- <h2>Últimos Registros</h2>
+        <ul id="productList"></ul> -->
+
+        <!-- Botões para navegar entre os templates -->
+        
+        <div style="margin-top: 20px;">
+            <button onclick="location.href='/produtos'" style="margin-right: 10px;">Gerenciar Produtos</button>
+        
+            <button onclick="location.href='/movimentacao'" style="margin-right: 10px;">Gerenciar Movimentações</button>
+
+            <!-- <button onclick="location.href='/cliente'" style="margin-right: 10px;">Gerenciar Clientes</button>  -->
+        
+            <!-- Adicione mais botões conforme necessário -->
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+</body>
+</html>
